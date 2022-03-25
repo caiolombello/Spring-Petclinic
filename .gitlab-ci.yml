@@ -11,6 +11,7 @@ test app:
     - ./mvnw install
   script:
     - ./mvnw spring-boot:run &
+    - sleep 120
     - curl http://localhost:8080
 
 package app:
