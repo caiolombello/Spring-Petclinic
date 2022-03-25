@@ -40,7 +40,7 @@ deploy app:
   before_script:
     - npm install -g surge
   script:
-    -surge --project ./target --domain ${CNAME}
+    - surge --project ./target --domain ${CNAME}
   environment:
     name: prd
     url: http://${CNAME}
