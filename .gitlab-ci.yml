@@ -11,12 +11,7 @@ test app:
     - ./mvnw install
   script:
     - ./mvnw spring-boot:run
-    - java -jar target/*.jar
-    - wait-on http://localhost:8080 --timeout 120000
     - curl http://localhost:8080
-
-package app:
-  stage: package
   cache:
     key: app_cache
     policy: push
@@ -26,6 +21,12 @@ package app:
     expire_in: 2 hrs
     paths:
       -  ./target/*.jar
+
+package app:
+  stage: package
+  cache:
+    key: app_cache
+    policy: pull
   script:
     - ./mvnw package
 
