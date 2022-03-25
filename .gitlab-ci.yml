@@ -10,7 +10,7 @@ test app:
   before_script:
     - ./mvnw install
   script:
-    - ./mvnw package
+    - ./mvnw spring-boot:run
     - java -jar target/*.jar
     - wait-on http://localhost:8080 --timeout 120000
     - curl http://localhost:8080
