@@ -28,7 +28,7 @@ package app:
   script:
     - ./mvnw package
 
-deploy app prd:
+deploy app:
   image: node:latest
   stage: deploy
   variables:
