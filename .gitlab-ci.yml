@@ -5,14 +5,14 @@ stages:
   - package
   - deploy
 
-test app:
-  stage: test
-  before_script:
-    - ./mvnw install
-  script:
-    - ./mvnw install && ./mvnw run &
-    - wait-on http://localhost:8080 --timeout 120000
-    - curl http://localhost:8080
+# test app:
+#   stage: test
+#   before_script:
+#     - ./mvnw install
+#   script:
+#     - ./mvnw install && ./mvnw run &
+#     - wait-on http://localhost:8080 --timeout 120000
+#     - curl http://localhost:8080
 
 package app:
   stage: package
