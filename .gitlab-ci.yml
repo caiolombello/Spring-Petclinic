@@ -1,4 +1,4 @@
-image: java:11
+image: openjdk:11-jdk-oracle
 
 stages:
   - test
@@ -30,6 +30,7 @@ package app:
     - ./mvnw package
 
 deploy app prd:
+  image: node:latest
   stage: deploy
   variables:
     CNAME: spring-petclinic-deploy.sh
