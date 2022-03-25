@@ -5,7 +5,6 @@ stages:
   - package
   - deploy
 
-
 test app:
   stage: test
   before_script:
@@ -31,7 +30,7 @@ package app:
     - mvn install
 
 deploy app prd:
-  stage: depoy
+  stage: deploy
   variables:
     CNAME: spring-petclinic-deploy.sh
     GIT_STRATEGY: none
