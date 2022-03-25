@@ -8,10 +8,9 @@ stages:
 test app:
   stage: test
   before_script:
-    - mvn test
+    - ./mvnw install
   script:
-    - docker build -f ./Dockerfile -t spring/petclinic .
-    - docker run -d --name petclinic -p 8080:8080 spring/petclinic
+    - ./mvnw install && ./mvnw run &
     - wait-on http://localhost:8080 --timeout 120000
     - curl http://localhost:8080
 
@@ -27,7 +26,7 @@ package app:
     paths:
       -  ./target/spring-petclinic-2.6.0-SNAPSHOT.jar
   script:
-    - mvn install
+    - ./mvnw package
 
 deploy app prd:
   stage: deploy
