@@ -10,8 +10,11 @@ test app:
   before_script:
     - ./mvnw install
   script:
-    - ./mvnw spring-boot:run
+    - ./mvnw spring-boot:run &
     - curl http://localhost:8080
+
+package app:
+  stage: package
   cache:
     key: app_cache
     policy: push
@@ -21,12 +24,6 @@ test app:
     expire_in: 2 hrs
     paths:
       -  ./target/*.jar
-
-package app:
-  stage: package
-  cache:
-    key: app_cache
-    policy: pull
   script:
     - ./mvnw package
 
