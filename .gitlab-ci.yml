@@ -13,6 +13,8 @@ test app:
     - ./mvnw spring-boot:run &
     - sleep 120
     - curl http://localhost:8080
+  tags: 
+    - docker
 
 package app:
   stage: package
@@ -27,12 +29,14 @@ package app:
       -  ./target/*.jar
   script:
     - ./mvnw package
+  tags: 
+    - docker
 
 deploy app:
   image: node:latest
   stage: deploy
   variables:
-    CNAME: spring-petclinic-deploy.sh
+    CNAME: spring-petclinic-deploy.cbarbieri.surge.sh
     GIT_STRATEGY: none
   cache:
     key: app_cache
@@ -46,6 +50,8 @@ deploy app:
     url: http://${CNAME}
   only:
     - main
+  tags: 
+    - docker
 
 
 
