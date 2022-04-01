@@ -42,12 +42,11 @@ deploy app:
     key: app_cache
     policy: pull
   script:
-    - apt-get update -yq
-    - apt-get install -y ruby-dev
-    - gem install dpl 
-    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
+    - git push https://$HEROKU_USER:$HEROKU_API_KEY@git.heroku.com/spring-petclinic-cbarbieri.git HEAD:main
+    - echo "Deployed to Heroku"
   environment:
     name: prd
+    url: https://spring-petclinic-cbarbieri.herokuapp.com/
   only:
     - main
   tags: 
