@@ -42,7 +42,7 @@ deploy app:
     key: app_cache
     policy: pull
   script:
-    - git push https://$HEROKU_USER:$HEROKU_API_KEY@git.heroku.com/spring-petclinic-cbarbieri.git HEAD:main
+    - git push https://$HEROKU_USER:$HEROKU_API_KEY@git.heroku.com/spring-petclinic-cbarbieri.git
     - echo "Deployed to Heroku"
   environment:
     name: prd
