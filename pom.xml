@@ -139,7 +139,7 @@
           </dependency>
           <dependency>
             <groupId>io.spring.nohttp</groupId>
-            <artifactId>nohttp-checkstyle</artifactId>a
+            <artifactId>nohttp-checkstyle</artifactId>
             <version>${nohttp-checkstyle.version}</version>
           </dependency>
         </dependencies>
