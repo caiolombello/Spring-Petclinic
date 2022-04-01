@@ -33,21 +33,17 @@ package app:
     - docker
 
 deploy app:
-  image: node:latest
+  image: ruby:latest
   stage: deploy
   variables:
-    CNAME: spring-petclinic-deploy.cbarbieri.surge.sh
     GIT_STRATEGY: none
   cache:
     key: app_cache
     policy: pull
-  before_script:
-    - npm install -g surge
   script:
-    - surge --project ./target --domain ${CNAME}
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
   environment:
     name: prd
-    url: http://${CNAME}
   only:
     - main
   tags: 
