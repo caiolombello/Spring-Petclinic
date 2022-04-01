@@ -24,7 +24,7 @@ package app:
     when: always
     expire_in: 2 hrs
     paths:
-      -  ./build
+      -  ./target/*.jar
   script:
     - ./mvnw package
   tags: 
