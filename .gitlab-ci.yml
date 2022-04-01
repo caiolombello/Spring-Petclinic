@@ -1,4 +1,4 @@
-image: openjdk:8-jdk
+image: openjdk:11.0
 
 stages:
   - test
@@ -7,8 +7,6 @@ stages:
 
 test app:
   stage: test
-  before_script:
-    - ./mvnw install  
   script:
     - ./mvnw spring-boot:run &
     - sleep 120
