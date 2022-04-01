@@ -8,6 +8,7 @@ stages:
 test app:
   stage: test
   script:
+    - ./mvnw install 
     - ./mvnw spring-boot:run &
     - sleep 120
     - curl http://localhost:8080
