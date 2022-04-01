@@ -7,8 +7,9 @@ stages:
 
 test app:
   stage: test
+  before_script:
+    - ./mvnw install
   script:
-    - ./mvnw install 
     - ./mvnw spring-boot:run &
     - sleep 120
     - curl http://localhost:8080
@@ -41,11 +42,10 @@ deploy app:
     key: app_cache
     policy: pull
   script:
-  #   - apt-get update -yq
-  #   - apt-get install -y ruby-dev
-  #   - gem install dpl 
-  #   - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
-    - ./mvnw clean heroku:deploy-war
+    - apt-get update -yq
+    - apt-get install -y ruby-dev
+    - gem install dpl 
+    - dpl --provider=heroku --app=$HEROKU_APP_PRODUCTION --api-key=$HEROKU_API_KEY
   environment:
     name: prd
   only:
