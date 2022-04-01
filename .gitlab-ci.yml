@@ -7,6 +7,8 @@ stages:
 
 test app:
   stage: test
+  before_script:
+    - ./mvnw install  
   script:
     - ./mvnw spring-boot:run &
     - sleep 120
