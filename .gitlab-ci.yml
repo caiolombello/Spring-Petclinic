@@ -1,20 +1,10 @@
-image: openjdk:11.0
+image: maven:3.6.3-jdk-11
+
 
 stages:
-  - test
   - package
+  - test
   - deploy
-
-test app:
-  stage: test
-  before_script:
-    - ./mvnw install
-  script:
-    - ./mvnw spring-boot:run &
-    - sleep 120
-    - curl http://localhost:8080
-  tags: 
-    - docker
 
 package app:
   stage: package
@@ -26,31 +16,29 @@ package app:
     when: always
     expire_in: 2 hrs
     paths:
-      -  ./target/*.jar
-  before_script:
-    - ./mvnw install
+      -  ./target/spring-petclinic-2.6.0-SNAPSHOT.jar
   script:
-    - ./mvnw package
+    - mvn clean package
   tags: 
     - docker
 
+test app:
+  stage: test
+  script:
+    - mvn test
+
 deploy app:
   stage: deploy
-  variables:
-    GIT_STRATEGY: none
-  cache:
-    key: app_cache
-    policy: pull
   script:
-    - git push https://$HEROKU_USER:$HEROKU_API_KEY@git.heroku.com/spring-petclinic-cbarbieri.git
-    - echo "Deployed to Heroku"
+    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/cbarbieri-spring-petclinic.git
+    - git push -f heroku HEAD:master 
+    - echo "Deployed to Staging Server https://cbarbieri-spring-petclinic.herokuapp.com/"
   environment:
-    name: prd
-    url: https://spring-petclinic-cbarbieri.herokuapp.com/
+    name: staging
+    url: https://cbarbieri-spring-petclinic.herokuapp.com/
   only:
     - main
-  tags: 
-    - docker
+
 
 
 
