@@ -39,6 +39,8 @@ deploy app:
     url: https://cbarbieri-spring-petclinic.herokuapp.com/
   only:
     - main
+  tags:
+    - docker 
 
 
 
