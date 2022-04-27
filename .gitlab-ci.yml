@@ -21,16 +21,6 @@ package app:
   tags: 
     - docker
 
-test app:
-  cache:
-    key: app_cache
-    policy: pull
-  stage: test
-  script:
-    - mvn test
-  tags:
-    - docker
-
 deploy app:
   stage: deploy
   script:
