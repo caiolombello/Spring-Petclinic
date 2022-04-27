@@ -22,6 +22,9 @@ package app:
     - docker
 
 test app:
+  cache:
+    key: app_cache
+    policy: pull
   stage: test
   script:
     - mvn test
@@ -33,7 +36,7 @@ deploy app:
   script:
     - git remote remove heroku
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/cbarbieri-spring-petclinic.git
-    - git push -f heroku HEAD:main 
+    - git push -f heroku HEAD:master 
     - echo "Deployed to Staging Server https://cbarbieri-spring-petclinic.herokuapp.com/"
   environment:
     name: staging
