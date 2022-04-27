@@ -1,6 +1,5 @@
 image: maven:3.6.3-jdk-11
 
-
 stages:
   - package
   - test
@@ -26,6 +25,8 @@ test app:
   stage: test
   script:
     - mvn test
+  tags:
+    - docker
 
 deploy app:
   stage: deploy
