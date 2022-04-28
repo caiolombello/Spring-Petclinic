@@ -6,9 +6,6 @@ stages:
 package app:
   image: maven:3.6.3-jdk-11
   stage: package
-  cache:
-    key: app_cache
-    policy: push
   artifacts:
     name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
     when: always
@@ -22,10 +19,11 @@ package app:
 
 deploy app:
   stage: deploy
+  before_script:
+    - curl https://cli-assets.heroku.com/install.sh | sh
   script:
-    - git remote remove heroku
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/cbarbieri-spring-petclinic.git
-    - git push -f heroku HEAD:master 
+    - git push --set-upstream origin heroku HEAD:master 
     - echo "Deployed to Staging Server https://cbarbieri-spring-petclinic.herokuapp.com/"
   environment:
     name: staging
