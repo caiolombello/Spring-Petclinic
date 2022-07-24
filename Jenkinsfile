@@ -3,10 +3,26 @@ pipeline {
 
     stages {
 
-        stage("build") {
-
+        stage("build docker image") {
+            
             steps {
-                echo 'building the application...'
+                sh 'docker build -t spring-petclinic/app .'
+            }
+        
+        }
+
+        stage("deploy docker compose") {
+            
+            steps {
+                sh 'docker-compose up --build -d'
+            }
+
+        }
+
+        stage("deploying containers") {
+            
+            steps {
+                sh 'sleep 10'
             }
 
         }
@@ -14,21 +30,10 @@ pipeline {
         stage("test") {
 
             steps {
-                echo 'testing the application...'
-            }
-
-        }
-
-        stage("deploy") {
-
-            steps {
-                echo 'deploying the apllication...'
+                sh 'chmod +x test-app.sh'
+                sh './test-app.sh'
             }
 
         }
     }
-}
-
-node {
-    // groovy script
 }
